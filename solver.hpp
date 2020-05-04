@@ -11,62 +11,75 @@ namespace solver{
 
     public:
 
-        double sum = 0;
-        double value;
+        double x_2;
+        double x_1;
+        double x_0;
 
-        RealVariable& operator==(double x);
+        RealVariable(){
+            this->x_1=1;
+            this->x_2=0;
+            this->x_0=0;
+        }
+        ~RealVariable() {}
+		
+        RealVariable(double x2, double x1, double x0) {
+			this->x_2 = x2;
+			this->x_1 = x1;
+			this->x_0 = x0;
+		}
 
-        RealVariable &operator==(RealVariable &x);
-
-        RealVariable &operator+(double x);
-
-        RealVariable &operator+(RealVariable &x);
-
-        RealVariable &operator-(double x);
-
-        RealVariable &operator-(RealVariable &x);
-
-        RealVariable &operator*(double x);
-
-        RealVariable &operator*(RealVariable &x);
-
-        RealVariable &operator^(double x);
-
-        RealVariable &operator^(RealVariable &x);
-
-        RealVariable &operator/(double x);
-
-        RealVariable &operator/(RealVariable &x);
-
+        const RealVariable operator==(const double oth) const;
+        const RealVariable operator*(const double oth) const;
+        const RealVariable operator-(const double oth) const;
+        const RealVariable operator+(const double oth) const;
+        const RealVariable operator/(const double oth) const;
+        const RealVariable operator^(const double oth) const;
+        
+		const RealVariable operator==(const RealVariable& re) const;
+        const RealVariable operator*(const RealVariable& re) const;
+        const RealVariable operator-(const RealVariable& re) const;
+        const RealVariable operator+(const RealVariable& re) const;
+        const RealVariable operator/(const RealVariable& re) const;
+        
+        
     };
 
     class ComplexVariable {
 
+        std::complex<double> x_0;
+        std::complex<double> x_1;
+        std::complex<double> x_2;
+
     public:
 
-        std::complex<double> Num = 0;
-        std::complex<double> value;
+       ComplexVariable(){
+           this->x_0=0.0;
+           this->x_1=1.0;
+           this->x_2=0.0;
+       }
+       ~ComplexVariable(){}  
+       
 
-        ComplexVariable &operator+(std::complex<double> x);
-        ComplexVariable &operator==(std::complex<double> x);
-        ComplexVariable &operator*(ComplexVariable &x);
-        ComplexVariable &operator+(ComplexVariable &x);
-        ComplexVariable &operator==(ComplexVariable &x);
-        ComplexVariable &operator/(ComplexVariable &x);
-        ComplexVariable &operator-(std::complex<double> x);
-        ComplexVariable &operator^(std::complex<double> x);
-        ComplexVariable &operator-(ComplexVariable &x);
-        ComplexVariable &operator/(std::complex<double> x);
-        ComplexVariable &operator*(std::complex<double> x);
-        ComplexVariable &operator^(ComplexVariable &x); 
+        const ComplexVariable operator+(std::complex<double> x) const;
+        const ComplexVariable operator==(std::complex<double> x) const;
+        const ComplexVariable operator-(std::complex<double> x) const;
+        const ComplexVariable operator^(std::complex<double> x) const;
+        const ComplexVariable operator/(std::complex<double> x) const;
+        const ComplexVariable operator*(std::complex<double> x) const;
+
+        const ComplexVariable operator*(const ComplexVariable &x) const;
+        const ComplexVariable operator+(const ComplexVariable &x) const;
+        const ComplexVariable operator==(const ComplexVariable &x) const;
+        const ComplexVariable operator/(const ComplexVariable &x) const;
+        const ComplexVariable operator-(const ComplexVariable &x) const;
         
     };
 
-    RealVariable& operator==(double x, RealVariable &y);
-    RealVariable &operator/(double x, RealVariable &y);
-    RealVariable &operator+(double x, RealVariable &y);
-    RealVariable &operator*(double x, RealVariable &y);
-    RealVariable &operator-(double x, RealVariable &y);
+    const RealVariable& operator==(double x,const RealVariable &y);
+    const RealVariable &operator/(double x,const RealVariable &y);
+    const RealVariable &operator+(double x,const RealVariable &y);
+    const RealVariable &operator*(double x,const RealVariable &y);
+    const RealVariable &operator-(double x,const RealVariable &y);
     
     ComplexVariable &operator+(std::complex<double> x, ComplexVariable &y);
     ComplexVariable &operator*(std::complex<double> x, ComplexVariable &y);
@@ -74,8 +87,8 @@ namespace solver{
     ComplexVariable &operator-(std::complex<double> x, ComplexVariable &y);
     ComplexVariable &operator/(std::complex<double> x, ComplexVariable &y);
    
-     double solve(RealVariable& x);
-     std::complex<double> solve(ComplexVariable& x);
+     double solve(const RealVariable& x);
+     std::complex<double> solve(const ComplexVariable& x);
 
 };
 
