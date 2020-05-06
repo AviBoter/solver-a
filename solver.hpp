@@ -70,6 +70,15 @@ namespace solver{
        
        ~ComplexVariable(){}  
        
+       std::complex<double> getx_0() const{
+         return this->x_0;
+        }
+        std::complex<double> getx_1() const{
+         return this->x_1;
+        }
+        std::complex<double> getx_2() const{
+         return this->x_2;
+        }
 
         const ComplexVariable operator+(std::complex<double> x) const;
         const ComplexVariable operator==(std::complex<double> x) const;
@@ -86,22 +95,21 @@ namespace solver{
         
     };
 
-    const RealVariable& operator==(double x,const RealVariable &y);
-    const RealVariable &operator/(double x,const RealVariable &y);
-    const RealVariable &operator+(double x,const RealVariable &y);
-    const RealVariable &operator*(double x,const RealVariable &y);
-    const RealVariable &operator-(double x,const RealVariable &y);
+    const RealVariable operator==(double x,const RealVariable &y);
+    const RealVariable operator/(double x,const RealVariable &y);
+    const RealVariable operator+(double x,const RealVariable &y);
+    const RealVariable operator*(double x,const RealVariable &y);
+    const RealVariable operator-(double x,const RealVariable &y);
     
-    ComplexVariable &operator+(std::complex<double> x, ComplexVariable &y);
-    ComplexVariable &operator*(std::complex<double> x, ComplexVariable &y);
-    ComplexVariable& operator==(std::complex<double> x, ComplexVariable &y);
-    ComplexVariable &operator-(std::complex<double> x, ComplexVariable &y);
-    ComplexVariable &operator/(std::complex<double> x, ComplexVariable &y);
+    const ComplexVariable operator+(std::complex<double> x, ComplexVariable &y);
+    const ComplexVariable operator*(std::complex<double> x, ComplexVariable &y);
+    const ComplexVariable operator==(std::complex<double> x, ComplexVariable &y);
+    const ComplexVariable operator-(std::complex<double> x, ComplexVariable &y);
+    const ComplexVariable operator/(std::complex<double> x, ComplexVariable &y);
    
-     double solve(const RealVariable& x);
-     std::complex<double> solve(const ComplexVariable& x);
+    double solve(const RealVariable& x);
+    std::complex<double> solve(const ComplexVariable& x);
 
-};
-
+}
 
 #endif 

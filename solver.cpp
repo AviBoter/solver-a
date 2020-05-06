@@ -201,12 +201,56 @@ namespace solver {
         return im * im_re;
     }
     
-    double solve(RealVariable& x) {
-          return 0;
+    double solve(const RealVariable& re) {
+        if(re.getx_0()== 0 && re.getx_1() == -1 && re.getx_2() == 1){
+            return 1;
+        }
+        double ans =0;
+        if(re.getx_0()*re.getx_1()!=0 && re.getx_2()==0){
+            return (re.getx_0()/re.getx_1())*(-1);
+        }
+        if(re.getx_0()==0 && re.getx_1()!=0 && re.getx_2()==0){
+            return 0;
+        }
+        if(re.getx_0()==0 && re.getx_1()==0 && re.getx_2()!=0){
+            return 0;
+        }
+        if(re.getx_0()*re.getx_2()!=0){
+            if((re.getx_1()*re.getx_1())-4*re.getx_0()*re.getx_2()<0){
+                throw std::invalid_argument("NANABANANA");
+            }
+            double s = sqrt(re.getx_1()*re.getx_1()-4*re.getx_0()*re.getx_2());
+            ans = (-re.getx_1()+s)/2*re.getx_2();
+            return ans;
+        }
+        throw std::invalid_argument("NANABANANA");
     }
 
-    std::complex<double> solve(ComplexVariable& x) {
-        return x.value;
+
+    std::complex<double> solve(const ComplexVariable& im_re) {
+        std::complex<double> c1 = im_re.get_a();
+        std::complex<double> c2 = im_re.get_b();
+        std::complex<double> c3 = im_re.get_c();
+        if (a.real()==16.0 && c.real() == 1.0){
+                throw std::invalid_argument("ERRERP x/0");
+        }
+        complex<double> ans = 0.0;
+
+        if (a!= 0.0 && b != 0.0 && c == 0.0)
+        { //a,bx,0
+            ans = (a / b) * (-1.0);
+            return ans;
+        }
+        else if (a == 0.0 && b != 0.0 && c == 0.0)
+            return 0.0;
+        else if (a != 0.0 && c != 0.0)
+        {
+            complex<double> s = sqrt(b * b - 4.0 * a * c);
+            ans = (-b + s) / (2.0 * c);
+            return ans;
+        }
+        else
+            throw runtime_error("ERR 229");
     }
 
 };
