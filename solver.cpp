@@ -133,14 +133,73 @@ namespace solver {
         else
         {
             c.x_0=x_0/re;
-            c.x_0=x_1/re;
-            c.x_0=x_2/re;
+            c.x_1=x_1/re;
+            c.x_2=x_2/re;
               return c;
         }
-
     }
   
+    const ComplexVariable ComplexVariable::operator+(const ComplexVariable &re)const {
+        ComplexVariable c;
+        c.x_0=x_0+re.x_0;
+        c.x_1=x_1+re.x_1;
+        c.x_2=x_2+re.x_2; 
+        return c;
+    }
 
+    const ComplexVariable ComplexVariable::operator==(const ComplexVariable &re)const {
+        ComplexVariable c;
+        c.x_0=x_0-re.x_0;
+        c.x_1=x_1-re.x_1;
+        c.x_2=x_2-re.x_2; 
+        return c;
+    }
+
+    const ComplexVariable ComplexVariable::operator-(const ComplexVariable &re)const {
+        ComplexVariable c;
+        c.x_0=x_0-re.x_0;
+        c.x_1=x_1-re.x_1;
+        c.x_2=x_2-re.x_2; 
+        return c;
+    }
+
+    const ComplexVariable ComplexVariable::operator*(const ComplexVariable &re)const {
+        ComplexVariable c;
+        c.x_0=x_0*re.x_1;
+        c.x_1=x_1*re.x_1+x_1*re.x_0;
+        c.x_2=x_2*re.x_2; 
+        return c;
+    }
+    
+    const ComplexVariable ComplexVariable::operator/(const ComplexVariable &re)const {
+        ComplexVariable c;
+        if (re.x_0!=0.0 && re.x_1==0.0 && re.x_2==0.0){
+             c.x_0=x_0/re.x_0;
+             c.x_1=x_1/re.x_0;
+             c.x_2=x_2/re.x_0; 
+            return c;
+        }
+        else
+        {
+            throw std::invalid_argument("x/0");
+        }
+    }
+
+    const ComplexVariable operator==(const std::complex<double> im_re, const ComplexVariable &im) {
+        return im == im_re;
+    }
+
+    const ComplexVariable operator+(const std::complex<double> im_re, const ComplexVariable &im) {
+        return im + im_re;
+    }
+
+    const ComplexVariable operator-(const std::complex<double> im_re, const ComplexVariable &im) {
+        return im_re + im*-1;
+    }
+
+    const ComplexVariable operator*(const std::complex<double> im_re, const ComplexVariable &im) {
+        return im * im_re;
+    }
     
     double solve(RealVariable& x) {
           return 0;
