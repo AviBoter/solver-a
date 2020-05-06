@@ -28,6 +28,16 @@ namespace solver{
 			this->x_0 = x0;
 		}
 
+        double getx_0() const{
+         return this->x_0;
+        }
+        double getx_1() const{
+         return this->x_1;
+        }
+        double getx_2() const{
+         return this->x_2;
+        }
+
         const RealVariable operator==(const double oth) const;
         const RealVariable operator*(const double oth) const;
         const RealVariable operator-(const double oth) const;
@@ -35,7 +45,7 @@ namespace solver{
         const RealVariable operator/(const double oth) const;
         const RealVariable operator^(const double oth) const;
         
-		const RealVariable operator==(const RealVariable& re) const;
+		const RealVariable operator==(const RealVariable re) const;
         const RealVariable operator*(const RealVariable& re) const;
         const RealVariable operator-(const RealVariable& re) const;
         const RealVariable operator+(const RealVariable& re) const;
