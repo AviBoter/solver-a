@@ -14,16 +14,16 @@ namespace solver {
     const RealVariable RealVariable::operator*(const double oth) const {
         return RealVariable(x_0,x_1*oth,x_2);
     }
-    const RealVariable RealVariable::operator-(const double x) const {
-        return RealVariable(x_0-x,x_1,x_2);
+    const RealVariable RealVariable::operator-(const double oth) const {
+        return RealVariable(x_0-oth,x_1,x_2);
     }
 
-    const RealVariable RealVariable::operator+(const double x) const {
-        return RealVariable(x_0+x,x_1,x_2);
+    const RealVariable RealVariable::operator+(const double oth) const {
+        return RealVariable(x_0+oth,x_1,x_2);
     }
 
-    const RealVariable RealVariable::operator^(const double x) const{
-        if(x<3 && x_2==0){
+    const RealVariable RealVariable::operator^(const double oth) const{
+        if(oth<3 && x_2==0){
             if(x_0!=0){
                 return RealVariable(x_0*x_0,2*x_0*x_1,x_1*x_1);
             }
@@ -35,39 +35,39 @@ namespace solver {
         throw std::invalid_argument("Invaild argument ^");
     }
     
-     const RealVariable RealVariable::operator/(const double x) const {
-        if (x==0){
+     const RealVariable RealVariable::operator/(const double oth) const {
+        if (oth==0){
             throw std::invalid_argument("double x/0");
         }
         else
         {
-            return RealVariable(x_0/x,x_1/x,x_2/x);
+            return RealVariable(x_0/oth,x_1/oth,x_2/oth);
         }
     }
 
-    const RealVariable RealVariable::operator+(const RealVariable &x) const {
-        return RealVariable(x_0+x.x_0,x_1+x.x_1,x_2+x.x_2);
+    const RealVariable RealVariable::operator+(const RealVariable &oth) const {
+        return RealVariable(x_0+oth.x_0,x_1+oth.x_1,x_2+oth.x_2);
     }
 
-    const RealVariable operator==(const double x,const  RealVariable& y) {
-        return y == x;
+    const RealVariable operator==(const double oth,const  RealVariable& re) {
+        return re == oth;
     }
 
-    const RealVariable operator+(const double x, const RealVariable &y) {
-        return y + x;
+    const RealVariable operator+(const double oth, const RealVariable &re) {
+        return re + oth;
     }
 
-    const RealVariable operator-(const double x, const RealVariable &y) {
-        return x + y*-1;
+    const RealVariable operator-(const double oth, const RealVariable &re) {
+        return oth + re*-1;
     }
 
-    const RealVariable operator*(const double x,const RealVariable &y) {
-        return y * x;
+    const RealVariable operator*(const double oth,const RealVariable &re) {
+        return re * oth;
     }
 
-    const RealVariable RealVariable::operator/(const RealVariable &x) const{
-        if (x.x_0!=0 && x.x_1==0 && x.x_2==0){
-            return RealVariable(x_0/x.x_0,x_1/x.x_0,x_2/x.x_0);
+    const RealVariable RealVariable::operator/(const RealVariable &re) const{
+        if (re.x_0!=0 && re.x_1==0 && re.x_2==0){
+            return RealVariable(x_0/re.x_0,x_1/re.x_0,x_2/re.x_0);
         }
         else
         {
@@ -75,65 +75,72 @@ namespace solver {
         }
     }
 
-    ComplexVariable &ComplexVariable::operator/(ComplexVariable &x){
-        return *this;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+     const ComplexVariable ComplexVariable::operator+(const std::complex<double> oth)const {
+         ComplexVariable c;
+         c.x_0=c.x_0+oth;
+        return c;
     }
-    ComplexVariable& operator==(std::complex<double> x, ComplexVariable &y) {
-        return y == x;
+    const ComplexVariable ComplexVariable::operator==(const std::complex<double> oth)const {
+         ComplexVariable c;
+         c.x_0=c.x_0-oth;
+        return c;
     }
-
-    ComplexVariable& operator+(std::complex<double> x, ComplexVariable &y) {
-        return y + x;
-    }
-
-    ComplexVariable& operator-(std::complex<double> x, ComplexVariable &y) {
-        return x - y;
-    }
-
-    ComplexVariable& operator*(std::complex<double> x, ComplexVariable &y) {
-        return y * x;
-    }
-    ComplexVariable& ComplexVariable::operator+(ComplexVariable &x){
-        return *this;
-    }
-    ComplexVariable& ComplexVariable::operator==(ComplexVariable &x){
-        return *this;
+    const ComplexVariable ComplexVariable::operator-(const std::complex<double> oth)const {
+        ComplexVariable c;
+        c.x_0=c.x_0-oth;
+        return c;
     }
 
-    ComplexVariable &ComplexVariable::operator-(std::complex<double> x){
-        return *this;
-    }
-    ComplexVariable &ComplexVariable::operator*(std::complex<double> x){
-        return *this;
-    }
-    ComplexVariable& ComplexVariable::operator+(std::complex<double> x){
-        return *this;
-    }
-    ComplexVariable& ComplexVariable::operator==(std::complex<double> x){
-        return *this;
+    const ComplexVariable ComplexVariable::operator*(const std::complex<double> oth)const {
+         ComplexVariable c;
+        c.x_0=c.x_0*oth;
+        c.x_1=c.x_1*oth;
+        c.x_2=c.x_2*oth;
+        return c;
     }
 
-    ComplexVariable &ComplexVariable::operator-(ComplexVariable &x){
-        return *this;
+    const ComplexVariable ComplexVariable::operator^(const std::complex<double> re)const {
+        if (re==-2.0){
+            throw std::invalid_argument("x^-2 isn't valid");
+        }
+        if(re.real()<=2.0 && x_2==0.0){
+            ComplexVariable c;
+            if(x_0==0.0){
+              c.x_0=x_0;
+              c.x_1=0;
+              c.x_2=x_1;
+                return c;
+            }
+            else
+            {
+              c.x_0=x_0*x_0;
+              c.x_1=2.0*x_0*x_1;
+              c.x_2=x_1*x_1;
+                return c;
+            }
+        }
+        throw std::invalid_argument("^ isnt valid");
+    }
+
+    const ComplexVariable ComplexVariable::operator/(const std::complex<double> re)const {
+         ComplexVariable c;
+        if (re==0.0){
+             throw std::invalid_argument("ERRERP x/0");
+            
+        }
+        else
+        {
+            c.x_0=x_0/re;
+            c.x_0=x_1/re;
+            c.x_0=x_2/re;
+              return c;
+        }
 
     }
-    ComplexVariable &ComplexVariable::operator*(ComplexVariable &x){
-        return *this;
+  
 
-    }
-     ComplexVariable &ComplexVariable::operator^(ComplexVariable &x){
-        return *this;
-
-    }
-    ComplexVariable &ComplexVariable::operator^(std::complex<double> x){
-        return *this;
-
-    }
-    ComplexVariable &ComplexVariable::operator/(std::complex<double> x){
-        return *this;
-
-    }
     
     double solve(RealVariable& x) {
           return 0;

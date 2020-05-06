@@ -67,6 +67,7 @@ namespace solver{
            this->x_1=1.0;
            this->x_2=0.0;
        }
+       
        ~ComplexVariable(){}  
        
 
