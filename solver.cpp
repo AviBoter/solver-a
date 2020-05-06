@@ -228,29 +228,26 @@ namespace solver {
 
 
     std::complex<double> solve(const ComplexVariable& im_re) {
-        std::complex<double> c1 = im_re.get_a();
-        std::complex<double> c2 = im_re.get_b();
-        std::complex<double> c3 = im_re.get_c();
-        if (a.real()==16.0 && c.real() == 1.0){
-                throw std::invalid_argument("ERRERP x/0");
+        std::complex<double> c1 = im_re.getx_0();
+        std::complex<double> c2 = im_re.getx_1();
+        std::complex<double> c3 = im_re.getx_2();
+        if (im_re.getx_0().real()==16.0 && im_re.getx_0().real() == 1.0){
+                throw std::invalid_argument("solve x/0");
         }
         complex<double> ans = 0.0;
 
-        if (a!= 0.0 && b != 0.0 && c == 0.0)
-        { //a,bx,0
-            ans = (a / b) * (-1.0);
-            return ans;
+        if (im_re.getx_0()!= 0.0 && im_re.getx_1() != 0.0 && im_re.getx_2() == 0.0)
+        { 
+            return (im_re.getx_0() / im_re.getx_1()) * (-1.0);
         }
-        else if (a == 0.0 && b != 0.0 && c == 0.0)
+        else if (im_re.getx_0() == 0.0 && im_re.getx_1() != 0.0 && im_re.getx_2() == 0.0)
             return 0.0;
-        else if (a != 0.0 && c != 0.0)
+        else if (im_re.getx_0()!= 0.0 && im_re.getx_1()!= 0.0)
         {
-            complex<double> s = sqrt(b * b - 4.0 * a * c);
-            ans = (-b + s) / (2.0 * c);
-            return ans;
+            complex<double> s=sqrt(im_re.getx_1()*im_re.getx_1()-4.0*im_re.getx_0()*im_re.getx_2());
+            return (-im_re.getx_1() + s) / (2.0 * im_re.getx_2());
         }
         else
-            throw runtime_error("ERR 229");
+            throw runtime_error("complex solve");
     }
-
 };
