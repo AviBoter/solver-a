@@ -75,26 +75,6 @@ namespace solver {
         }
     }
 
-    RealVariable& RealVariable::operator*(double x) {
-        return *this ;
-    }
-
-    RealVariable& RealVariable::operator*(RealVariable &x) {
-        return *this ;
-    }
-
-    RealVariable& RealVariable::operator^(double x) {
-        return *this;
-    }
-
-    RealVariable& RealVariable::operator/(RealVariable &x) {
-        return *this;
-    }
-
-    RealVariable& RealVariable::operator/(double x) {
-        return *this;
-    }
-
     ComplexVariable &ComplexVariable::operator/(ComplexVariable &x){
         return *this;
 
