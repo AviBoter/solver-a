@@ -241,13 +241,10 @@ namespace solver {
         }
 
         if(re.getx_0()*re.getx_2()!=0){
-             try{ 
             if((re.getx_1()*re.getx_1())-4*re.getx_0()*re.getx_2()<0){
-               //nothing
+                throw std::runtime_error("NANABANANA1");
             }
-            } catch(exception e){
-            cout<<e.what()<<endl;
-        }
+        
             double s = sqrt(re.getx_1()*re.getx_1()-4*re.getx_0()*re.getx_2());
             ans = (-re.getx_1()+s)/2*re.getx_2();
             return ans;
